@@ -1,0 +1,28 @@
+#include "InfoLayer.h"
+
+#include "data/GlobalInputs.h"
+#include "data/GlobalOutputs.h"
+#include "gui/UiManager.h"
+#include "gui/Utils.h"
+#include "gui/components/UiComponents.h"
+#include "gui/renderer/Renderer.h"
+
+InfoLayer::InfoLayer()
+{
+}
+
+InfoLayer::~InfoLayer()
+{
+}
+
+void InfoLayer::update()
+{
+    Color activeColor = Utils::getColorFromBrytec(GlobalOutputs::values["guageColor"]);
+    Color backgroundColor = GetColor(GlobalOutputs::gray);
+
+    int newScreenNum = (int)GlobalOutputs::values["screenLayout"];
+    if (newScreenNum != 0)
+        UiManager::get().removeLayer(this);
+
+    Ui::Text({ 400.0f, 100.0f }, "Info", 100);
+}
