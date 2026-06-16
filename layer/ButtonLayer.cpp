@@ -1,5 +1,6 @@
 #include "ButtonLayer.h"
 
+#include "data/GlobalInputs.h"
 #include "gui/UiManager.h"
 #include "gui/Utils.h"
 #include "gui/components/UiComponents.h"
@@ -11,7 +12,7 @@
 
 ButtonLayer::ButtonLayer()
 {
-    // UiManager::get().pushLayerBack<SettingsLayer>();
+    setScreen(Screens::Info);
 }
 
 ButtonLayer::~ButtonLayer()
@@ -23,21 +24,21 @@ void ButtonLayer::update()
     Color activeColor = Utils::getColorFromBrytec(GlobalOutputs::values["guageColor"]);
     Color backgroundColor = GetColor(GlobalOutputs::black);
 
-    int newScreenNum = (int)GlobalOutputs::values["screenLayout"];
+    int currentScreen = (int)GlobalOutputs::values["screenLayout"];
 
-    if (Ui::Button("Info", { 100, 1230 }, { 200, 100 }, 38, newScreenNum == Screens::Info ? activeColor : backgroundColor, activeColor))
+    if (Ui::Button("Info", { 100, 1230 }, { 200, 100 }, 38, currentScreen == Screens::Info ? activeColor : backgroundColor, activeColor))
         setScreen(Screens::Info);
-    if (Ui::Button("Map", { 300, 1230 }, { 200, 100 }, 38, newScreenNum == Screens::Map ? activeColor : backgroundColor, activeColor))
+    if (Ui::Button("Map", { 300, 1230 }, { 200, 100 }, 38, currentScreen == Screens::Map ? activeColor : backgroundColor, activeColor))
         setScreen(Screens::Map);
-    if (Ui::Button("Hvac", { 500, 1230 }, { 200, 100 }, 38, newScreenNum == Screens::Hvac ? activeColor : backgroundColor, activeColor))
+    if (Ui::Button("Hvac", { 500, 1230 }, { 200, 100 }, 38, currentScreen == Screens::Hvac ? activeColor : backgroundColor, activeColor))
         setScreen(Screens::Hvac);
-    if (Ui::Button("Settings", { 700, 1230 }, { 200, 100 }, 38, newScreenNum == Screens::Settings ? activeColor : backgroundColor, activeColor))
+    if (Ui::Button("Settings", { 700, 1230 }, { 200, 100 }, 38, currentScreen == Screens::Settings ? activeColor : backgroundColor, activeColor))
         setScreen(Screens::Settings);
 }
 
 void ButtonLayer::setScreen(Screens screen)
 {
-    GlobalOutputs::values["screenLayout"] = (float)screen;
+    GlobalInputs::values["screenLayout"] = (float)screen;
 
     switch (screen) {
     case Screens::Info:

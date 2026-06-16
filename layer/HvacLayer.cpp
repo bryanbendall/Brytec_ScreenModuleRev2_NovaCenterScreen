@@ -19,7 +19,8 @@ HvacLayer::~HvacLayer()
 void HvacLayer::update()
 {
     Color activeColor = Utils::getColorFromBrytec(GlobalOutputs::values["guageColor"]);
-    Color backgroundColor = GetColor(GlobalOutputs::gray);
+    Color backgroundColor = GetColor(GlobalOutputs::black);
+    Color borderColor = GetColor(GlobalOutputs::gray);
 
     int newScreenNum = (int)GlobalOutputs::values["screenLayout"];
     if (newScreenNum != 2)
@@ -48,19 +49,19 @@ void HvacLayer::update()
 
         Ui::Text({ 220.0f, 550.0f }, "Clutch On", 40);
 
-        if (Ui::Button("-", { 145.0f, 625.0f }, { 50.0f, 50.0f }, 30, backgroundColor, activeColor))
+        if (Ui::RoundedButton("-", { 145.0f, 625.0f }, { 80.0f, 80.0f }, 30, backgroundColor, activeColor, borderColor))
             acOnTemp -= 1.0f;
 
         std::string lable = fmt::format("{:.0f}", acOnTemp);
         Ui::Text({ 220.0f, 625.0f }, lable.c_str(), 30);
 
-        if (Ui::Button("+", { 295.0f, 625.0f }, { 50.0f, 50.0f }, 30, backgroundColor, activeColor))
+        if (Ui::RoundedButton("+", { 295.0f, 625.0f }, { 80.0f, 80.0f }, 30, backgroundColor, activeColor, borderColor))
             acOnTemp += 1.0f;
     }
 
     {
         Color c = GlobalOutputs::values["acClutchStatus"] ? GetColor(GlobalOutputs::green) : GetColor(GlobalOutputs::gray);
-        Renderer::submitCircle({ 400.0f, 600.0f }, { 80, 80 }, c);
+        Renderer::submitCircle({ 400.0f, 600.0f }, 40, c);
     }
 
     {
@@ -68,13 +69,13 @@ void HvacLayer::update()
 
         Ui::Text({ 580.0f, 550.0f }, "Clutch Off", 40);
 
-        if (Ui::Button("-", { 505.0f, 625.0f }, { 50.0f, 50.0f }, 30, backgroundColor, activeColor))
+        if (Ui::RoundedButton("-", { 505.0f, 625.0f }, { 80.0f, 80.0f }, 30, backgroundColor, activeColor, borderColor))
             acOffTemp -= 1.0f;
 
         std::string lable = fmt::format("{:.0f}", acOffTemp);
         Ui::Text({ 580.0f, 625.0f }, lable.c_str(), 30);
 
-        if (Ui::Button("+", { 655.0f, 625.0f }, { 50.0f, 50.0f }, 30, backgroundColor, activeColor))
+        if (Ui::RoundedButton("+", { 655.0f, 625.0f }, { 80.0f, 80.0f }, 30, backgroundColor, activeColor, borderColor))
             acOffTemp += 1.0f;
     }
 
@@ -83,33 +84,33 @@ void HvacLayer::update()
 
         Ui::Text({ 400.0f, 760.0f }, "Fan", 40);
 
-        if (Ui::Button("Off", { 250.0f - 30.0f, 840.0f }, { 100.0f, 80.0f }, 30, hvacFan == 0.0f ? activeColor : backgroundColor, activeColor))
+        if (Ui::RoundedButton("Off", { 250.0f - 30.0f, 840.0f }, { 100.0f, 80.0f }, 30, hvacFan == 0.0f ? activeColor : backgroundColor, activeColor, borderColor))
             hvacFan = 0.0f;
-        if (Ui::Button("Lo", { 350.0f - 10.0f, 840.0f }, { 100.0f, 80.0f }, 30, hvacFan == 1.0f ? activeColor : backgroundColor, activeColor))
+        if (Ui::RoundedButton("Lo", { 350.0f - 10.0f, 840.0f }, { 100.0f, 80.0f }, 30, hvacFan == 1.0f ? activeColor : backgroundColor, activeColor, borderColor))
             hvacFan = 1.0f;
-        if (Ui::Button("Med", { 450.0f + 10.0f, 840.0f }, { 100.0f, 80.0f }, 30, hvacFan == 2.0f ? activeColor : backgroundColor, activeColor))
+        if (Ui::RoundedButton("Med", { 450.0f + 10.0f, 840.0f }, { 100.0f, 80.0f }, 30, hvacFan == 2.0f ? activeColor : backgroundColor, activeColor, borderColor))
             hvacFan = 2.0f;
-        if (Ui::Button("Hi", { 550.0f + 30.0f, 840.0f }, { 100.0f, 80.0f }, 30, hvacFan == 3.0f ? activeColor : backgroundColor, activeColor))
+        if (Ui::RoundedButton("Hi", { 550.0f + 30.0f, 840.0f }, { 100.0f, 80.0f }, 30, hvacFan == 3.0f ? activeColor : backgroundColor, activeColor, borderColor))
             hvacFan = 3.0f;
     }
 
     {
         float& acEnable = GlobalInputs::values["acEnable"];
 
-        if (Ui::Button("A/C Enable", { 400.0f, 970.0f }, { 200.0f, 80.0f }, 30, acEnable > 0.0f ? activeColor : backgroundColor, activeColor))
+        if (Ui::RoundedButton("A/C Enable", { 400.0f, 970.0f }, { 200.0f, 80.0f }, 30, acEnable > 0.0f ? activeColor : backgroundColor, activeColor, borderColor))
             acEnable > 0.0f ? acEnable = 0.0f : acEnable = 1.0f;
     }
 
     {
         float& hvacLevel = GlobalInputs::values["hvacLevel"];
 
-        if (Ui::Button("Defrost", { 175.0f - 30.0f, 1100.0f }, { 150.0f, 80.0f }, 30, hvacLevel == 0.0f ? activeColor : backgroundColor, activeColor))
+        if (Ui::RoundedButton("Defrost", { 175.0f - 30.0f, 1100.0f }, { 150.0f, 80.0f }, 30, hvacLevel == 0.0f ? activeColor : backgroundColor, activeColor, borderColor))
             hvacLevel = 0.0f;
-        if (Ui::Button("Dash", { 325.0f - 10.0f, 1100.0f }, { 150.0f, 80.0f }, 30, hvacLevel == 1.0f ? activeColor : backgroundColor, activeColor))
+        if (Ui::RoundedButton("Dash", { 325.0f - 10.0f, 1100.0f }, { 150.0f, 80.0f }, 30, hvacLevel == 1.0f ? activeColor : backgroundColor, activeColor, borderColor))
             hvacLevel = 1.0f;
-        if (Ui::Button("Bi Level", { 475.0f + 10.0f, 1100.0f }, { 150.0f, 80.0f }, 30, hvacLevel == 2.0f ? activeColor : backgroundColor, activeColor))
+        if (Ui::RoundedButton("Bi Level", { 475.0f + 10.0f, 1100.0f }, { 150.0f, 80.0f }, 30, hvacLevel == 2.0f ? activeColor : backgroundColor, activeColor, borderColor))
             hvacLevel = 2.0f;
-        if (Ui::Button("Floor", { 625.0f + 30.0f, 1100.0f }, { 150.0f, 80.0f }, 30, hvacLevel == 3.0f ? activeColor : backgroundColor, activeColor))
+        if (Ui::RoundedButton("Floor", { 625.0f + 30.0f, 1100.0f }, { 150.0f, 80.0f }, 30, hvacLevel == 3.0f ? activeColor : backgroundColor, activeColor, borderColor))
             hvacLevel = 3.0f;
     }
 }

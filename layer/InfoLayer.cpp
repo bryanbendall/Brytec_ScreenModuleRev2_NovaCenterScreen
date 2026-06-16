@@ -25,4 +25,10 @@ void InfoLayer::update()
         UiManager::get().removeLayer(this);
 
     Ui::Text({ 400.0f, 100.0f }, "Info", 100);
+
+    float y = 200.0f;
+    for (auto& stat : m_stats.getStats()) {
+        Renderer::submitText({ 50.0f, y }, stat.interface + "  -  " + stat.ipAddress + "  -  " + stat.ssidName, 20, GetColor(GlobalOutputs::white), Renderer::TextAnchor::Left);
+        y += 30.0f;
+    }
 }
