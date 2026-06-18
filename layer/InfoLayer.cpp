@@ -26,7 +26,10 @@ void InfoLayer::update()
 
     Ui::Text({ 400.0f, 100.0f }, "Info", 100);
 
-    float y = 200.0f;
+    if (Ui::RoundedButton("Show ImGui", { 400.0f, 240.0f }, { 300.0f, 80.0f }, 30))
+        GlobalOutputs::values["showImGui"] = GlobalOutputs::values["showImGui"] > 0.0f ? 0.0f : 1.0f;
+
+    float y = 340.0f;
     for (auto& stat : m_stats.getStats()) {
         Renderer::submitText({ 50.0f, y }, stat.interface + "  -  " + stat.ipAddress + "  -  " + stat.ssidName, 20, GetColor(GlobalOutputs::white), Renderer::TextAnchor::Left);
         y += 30.0f;
