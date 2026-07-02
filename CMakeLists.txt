@@ -19,4 +19,5 @@ target_include_directories(custom PUBLIC
                             ${CMAKE_SOURCE_DIR}/vendor/raylib/src
                             ${CMAKE_SOURCE_DIR}/vendor/yaml-cpp/include
                             ${CMAKE_SOURCE_DIR}/vendor/fmt/include
+                            ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui
                             )
