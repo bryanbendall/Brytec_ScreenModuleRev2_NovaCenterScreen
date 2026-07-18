@@ -21,4 +21,5 @@ public:
 
 private:
     void setScreen(Screens screen);
+    void removeScreen(Screens screen);
 };

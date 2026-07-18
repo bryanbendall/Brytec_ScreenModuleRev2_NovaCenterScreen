@@ -23,10 +23,6 @@ void SettingsLayer::update()
     Color backgroundColor = GetColor(GlobalOutputs::black);
     Color borderColor = GetColor(GlobalOutputs::gray);
 
-    int newScreenNum = (int)GlobalOutputs::values["screenLayout"];
-    if (newScreenNum != 3)
-        UiManager::get().removeLayer(this);
-
     Ui::Text({ 400.0f, 100.0f }, "Settings", 100);
 
     float& boostEnable = GlobalInputs::values["boostEnable"];
@@ -100,12 +96,12 @@ void SettingsLayer::update()
             primeMeth = 0.0f;
     }
 
-    float& useKph = GlobalInputs::values["useKph"];
+    float& setKph = GlobalInputs::values["setKph"];
 
-    if (Ui::RoundedButton("Mph", { 275.0f, 840.0f }, { 200.0f, 80.0f }, 30, useKph < 0.5f ? activeColor : backgroundColor, activeColor, borderColor))
-        useKph = 0.0f;
-    if (Ui::RoundedButton("Kph", { 525.0f, 840.0f }, { 200.0f, 80.0f }, 30, useKph > 0.5f ? activeColor : backgroundColor, activeColor, borderColor))
-        useKph = 1.0f;
+    if (Ui::RoundedButton("Mph", { 275.0f, 840.0f }, { 200.0f, 80.0f }, 30, setKph < 0.5f ? activeColor : backgroundColor, activeColor, borderColor))
+        setKph = 0.0f;
+    if (Ui::RoundedButton("Kph", { 525.0f, 840.0f }, { 200.0f, 80.0f }, 30, setKph > 0.5f ? activeColor : backgroundColor, activeColor, borderColor))
+        setKph = 1.0f;
 
     AnimationManager::get().tryGetValue(m_savedCooldown);
 

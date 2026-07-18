@@ -22,10 +22,6 @@ void HvacLayer::update()
     Color backgroundColor = GetColor(GlobalOutputs::black);
     Color borderColor = GetColor(GlobalOutputs::gray);
 
-    int newScreenNum = (int)GlobalOutputs::values["screenLayout"];
-    if (newScreenNum != 2)
-        UiManager::get().removeLayer(this);
-
     Ui::Text({ 400.0f, 100.0f }, "Hvac", 100);
 
     Ui::SmallGaugeSpec acPressSpec { };

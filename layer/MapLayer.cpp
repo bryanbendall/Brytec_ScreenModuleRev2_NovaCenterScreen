@@ -19,22 +19,15 @@ MapLayer::~MapLayer()
 void MapLayer::update()
 {
     static Vector2 textureSize = { 800.0f, 1100.0f };
-    ImGui::DragFloat2("texture size", (float*)&textureSize);
-    static float textureRot = 0.0f;
-    ImGui::DragFloat("texture rot", &textureRot);
 
     Color activeColor = Utils::getColorFromBrytec(GlobalOutputs::values["guageColor"]);
     Color backgroundColor = GetColor(GlobalOutputs::gray);
-
-    int newScreenNum = (int)GlobalOutputs::values["screenLayout"];
-    if (newScreenNum != 1)
-        UiManager::get().removeLayer(this);
 
     switch (m_state) {
     case State::Default: {
         Texture2D* texture = AssetManager::get().getCameraTexture("ScreenCapture");
         if (texture) {
-            Renderer::submitTextureCrop({ 400.0f, 620.0f }, *texture, textureSize, WHITE, textureRot);
+            Renderer::submitTextureCrop({ 400.0f, 620.0f }, *texture, textureSize, WHITE);
 
             if (Ui::RoundedButton("Close", { 100.0f, 32.0f }, { 180.0f, 60.0f }, 30)) {
                 RemoteCamera& screenCaptureCamera = CameraController::get().getCamera("ScreenCapture");
