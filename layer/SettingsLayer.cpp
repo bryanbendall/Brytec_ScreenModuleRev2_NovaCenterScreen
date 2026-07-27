@@ -83,17 +83,13 @@ void SettingsLayer::update()
     {
         float& primeGas = GlobalInputs::values["primeGas"];
 
-        if (Ui::RoundedMomentaryButton("Prime Gas", { 255.0f, 690.0f }, { 240.0f, 80.0f }, 30, primeGas > 0.0f ? activeColor : backgroundColor, GetColor(GlobalOutputs::gray)))
-            primeGas = 1.0f;
-        else
-            primeGas = 0.0f;
+        if (Ui::RoundedButton("Prime Gas", { 255.0f, 690.0f }, { 240.0f, 80.0f }, 30, primeGas > 0.0f ? activeColor : backgroundColor, activeColor, borderColor))
+            primeGas > 0.0f ? primeGas = 0.0f : primeGas = 1.0f;
 
         float& primeMeth = GlobalInputs::values["primeMeth"];
 
-        if (Ui::RoundedMomentaryButton("Prime Meth", { 545.0f, 690.0f }, { 240.0f, 80.0f }, 30, primeMeth > 0.0f ? activeColor : backgroundColor, GetColor(GlobalOutputs::gray)))
-            primeMeth = 1.0f;
-        else
-            primeMeth = 0.0f;
+        if (Ui::RoundedButton("Prime Meth", { 545.0f, 690.0f }, { 240.0f, 80.0f }, 30, primeMeth > 0.0f ? activeColor : backgroundColor, activeColor, borderColor))
+            primeMeth > 0.0f ? primeMeth = 0.0f : primeMeth = 1.0f;
     }
 
     float& setKph = GlobalInputs::values["setKph"];

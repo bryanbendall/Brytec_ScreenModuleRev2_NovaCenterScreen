@@ -58,7 +58,7 @@ void ButtonLayer::setScreen(Screens screen)
 
     switch (screen) {
     case Screens::Info:
-        UiManager::get().pushLayerBack<InfoLayer>(nullptr);
+        UiManager::get().pushLayerBack<InfoLayer>();
         break;
     case Screens::Map:
         UiManager::get().pushLayerBack<MapLayer>();
